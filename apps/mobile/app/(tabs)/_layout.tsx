@@ -1,49 +1,33 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChartPie } from '@fortawesome/free-solid-svg-icons';
 
-const CustomTabBarBackground = () => (
-  <View
-    style={{
-      flex: 1,
-      backgroundColor: 'transparent',
-      borderWidth: .7,
-      borderColor: '#000000',
-      borderRadius: 25,
-    }}
-  />
-);
-
+import { HapticTab } from '@/components/haptic-tab';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function TabLayout() {
+  const colorScheme = useColorScheme();
+
   return (
     <Tabs
       screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarInactiveTintColor: '#FFFFFF',
-        tabBarActiveTintColor: '#7EE2B5',
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 25,
-          marginHorizontal: 20,
-          height: 60,
-          backgroundColor: "transparent",
-          borderTopWidth: 0,
-          elevation: 0,
-        },
-        tabBarBackground: () => <CustomTabBarBackground />,
-      }}
-    >
-
+        tabBarButton: HapticTab,
+      }}>
       <Tabs.Screen
-        name='cotizaciones'
+        name="index"
         options={{
-          title: 'Cotizaciones',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faChartPie} size={size} color={color} />
-          ),
+          title: 'Home',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="explore"
+        options={{
+          title: 'Explore',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
     </Tabs>
