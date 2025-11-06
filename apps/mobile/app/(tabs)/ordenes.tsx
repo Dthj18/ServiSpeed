@@ -185,7 +185,6 @@ const styles = StyleSheet.create({
         color: "#000000",
         fontSize: 15,
         fontWeight: "bold",
-        fontFamily: "LexendTera-Bold",
         marginBottom: 8,
     },
     cardFila: {

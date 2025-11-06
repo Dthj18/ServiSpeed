@@ -37,6 +37,16 @@ export default function TabLayout() {
       }}
     >
 
+<Tabs.Screen
+        name='ordenes' 
+        options={{
+          title: 'Órdenes',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faChartPie} size={size} color={color} />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name='cotizaciones'
         options={{
