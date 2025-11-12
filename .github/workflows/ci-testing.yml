@@ -1,0 +1,50 @@
+# Nombre del flujo de trabajo
+name: CI para Testing
+
+# 1. EL DISPARADOR
+# Esto le dice a GitHub que ejecute este robot CADA VEZ
+# que alguien haga un push (o un merge) a la rama "testing".
+on:
+  push:
+    branches:
+      - testing
+
+jobs:
+  # 2. EL TRABAJO A REALIZAR
+  build-and-test:
+    # Usará una máquina virtual de Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso 1: Descargar tu código
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # Paso 2: Configurar pnpm (ya que usas monorepo)
+      - name: Configurar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # O la versión que estés usando
+
+      # Paso 3: Configurar Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # O la versión que estés usando
+          cache: 'pnpm'
+
+      # Paso 4: Instalar todas las dependencias
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      # Paso 5: Correr el Linter (Revisar estilo de código)
+      - name: Correr Linter
+        run: pnpm turbo run lint
+
+      # Paso 6: Correr las Pruebas Unitarias
+      - name: Correr Pruebas
+        run: pnpm turbo run test
+        
+      # Paso 7: Intentar construir el proyecto (si tienes un script de build)
+      # - name: Correr Build
+      #   run: pnpm turbo run build
