@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChartPie } from '@fortawesome/free-solid-svg-icons';
+import { faChartPie, faClipboardList, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const CustomTabBarBackground = () => (
   <View
@@ -37,12 +37,22 @@ export default function TabLayout() {
       }}
     >
 
-<Tabs.Screen
+      <Tabs.Screen
+        name='index'
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faHome} size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
         name='ordenes' 
         options={{
           title: 'Órdenes',
           tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faChartPie} size={size} color={color} />
+            <FontAwesomeIcon icon={faClipboardList} size={size} color={color} />
           ),
         }}
       />
