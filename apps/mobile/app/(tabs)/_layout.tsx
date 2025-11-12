@@ -8,7 +8,7 @@ const CustomTabBarBackground = () => (
   <View
     style={{
       flex: 1,
-      backgroundColor: 'transparent',
+      backgroundColor: '#FFFFFF',
       borderWidth: .7,
       borderColor: '#000000',
       borderRadius: 25,
